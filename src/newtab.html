@@ -9,13 +9,13 @@
     <script src="lib/simpleflake.js"></script>
     <script src="lib/angular.min.js"></script>
   </head>
-  <body ng-controller="BodyController">
+  <body ng-controller="BodyController" ng-click="showContextMenu = false">
     <div class="toolbar">
       <a
-        href="javascript:void(0)"
+        href="#"
         class="icon"
         title="Configure"
-        ng-click="configure()"
+        ng-click="showContextMenu = !showContextMenu; $event.stopPropagation()"
       >
         <img
           src="images/configure.png"
@@ -24,6 +24,22 @@
           alt="Configure"
         />
       </a>
+      <div class="context-menu" ng-if="showContextMenu">
+        <ul>
+          <li>
+            <a href="#" ng-click="toggleEditMode()">
+              <span ng-if="editMode">tick</span>
+              Edit Mode
+            </a>
+          </li>
+          <li><a href="#" ng-click="import()">Import</a></li>
+          <li><a href="#" ng-click="export()">Export</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="banner" ng-if="editMode">
+      Banner
+      <button ng-click="toggleEditMode()">Done</button>
     </div>
     <div class="content">
       <div class="container">
@@ -32,15 +48,21 @@
           <a
             class="bookmark"
             ng-repeat="item in column.items"
-            ng-href="{{ item.href }}"
+            ng-href="{{ editMode ? '' : item.href }}"
             ng-style="{ 'background-image': 'url(' + item.image + ')' }"
           >
             <span class="title">{{ item.title }}</span>
           </a>
+
+          <div class="add-bookmark" ng-if="editMode"></div>
         </div>
       </div>
     </div>
     <div class="footer">&copy; Andrew Butler 2021</div>
+
+    <div style="display: none">
+      <input type="file" id="importFile" />
+    </div>
 
     <script src="newtab.js"></script>
   </body>

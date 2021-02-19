@@ -9,6 +9,7 @@ body {
   display: grid;
   grid-template-areas:
     "toolbar"
+    "banner"
     "content"
     "footer";
 }
@@ -19,6 +20,44 @@ body {
   margin: 10px 10px 0 0;
   flex-direction: row;
   justify-content: flex-end;
+  position: relative;
+}
+
+.context-menu {
+  background: #fefefe;
+  z-index: 10;
+  position: absolute;
+  top: 24px;
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 5px 0;
+  padding: 5px 0;
+}
+
+.context-menu ul li a {
+  min-width: 150px;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.context-menu ul li a:hover {
+  background: #e9ecef;
+}
+
+.banner {
+  grid-area: banner;
+  justify-self: center;
+  width: 80%;
+  background: white;
+  color: #084298;
+  background-color: #cfe2ff;
+  border: solid 1px #b6d4fe;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .icon {
@@ -65,11 +104,11 @@ body {
   border-radius: 5px;
   min-width: 180px;
   min-height: 120px;
-  /* border: solid 1px #aaa; */
   box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
 }
 
-.bookmark:hover {
+.bookmark:hover,
+.add-bookmark:hover {
   box-shadow: 0px 0px 7px 0px rgba(128, 128, 128, 0.9);
 }
 
@@ -81,4 +120,16 @@ body {
   right: 0;
   background: #fefefe;
   border-radius: 0 0 4px 4px;
+  border-top: solid 1px #ccc;
+}
+
+.add-bookmark {
+  display: block;
+  position: relative;
+  padding: 5px;
+  margin: 15px 5px;
+  border-radius: 5px;
+  min-width: 180px;
+  min-height: 120px;
+  box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
 }
