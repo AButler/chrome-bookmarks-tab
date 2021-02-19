@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Tab</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script src="lib/simpleflake.js"></script>
+    <script src="lib/angular.min.js"></script>
+  </head>
+  <body ng-controller="BodyController">
+    <div class="toolbar">
+      <a
+        href="javascript:void(0)"
+        class="icon"
+        title="Configure"
+        ng-click="configure()"
+      >
+        <img
+          src="images/configure.png"
+          width="16"
+          height="16"
+          alt="Configure"
+        />
+      </a>
+    </div>
+    <div class="content">
+      <div class="container">
+        <div class="column" ng-repeat="column in bookmarks.columns">
+          <h2>{{ column.header }}</h2>
+          <a
+            class="bookmark"
+            ng-repeat="item in column.items"
+            ng-href="{{ item.href }}"
+            ng-style="{ 'background-image': 'url(' + item.image + ')' }"
+          >
+            <span class="title">{{ item.title }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer">&copy; Andrew Butler 2021</div>
+
+    <script src="newtab.js"></script>
+  </body>
+</html>

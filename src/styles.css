@@ -1,0 +1,84 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #efefef;
+  display: grid;
+  grid-template-areas:
+    "toolbar"
+    "content"
+    "footer";
+}
+
+.toolbar {
+  grid-area: toolbar;
+  display: flex;
+  margin: 10px 10px 0 0;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.content {
+  grid-area: content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  grid-area: footer;
+  justify-self: center;
+  color: #999;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.column {
+  flex: 0 1 auto;
+  margin: 10px;
+}
+
+.column h2 {
+  margin: 5px;
+  color: #333;
+}
+
+.bookmark {
+  display: block;
+  position: relative;
+  background: #fefefe;
+  padding: 5px;
+  margin: 15px 5px;
+  border-radius: 5px;
+  min-width: 180px;
+  min-height: 120px;
+  /* border: solid 1px #aaa; */
+  box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
+}
+
+.bookmark:hover {
+  box-shadow: 0px 0px 7px 0px rgba(128, 128, 128, 0.9);
+}
+
+.bookmark .title {
+  bottom: 0;
+  position: absolute;
+  padding: 5px;
+  left: 0;
+  right: 0;
+  background: #fefefe;
+  border-radius: 0 0 4px 4px;
+}
