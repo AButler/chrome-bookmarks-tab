@@ -1,18 +1,18 @@
-angular.module("app", []);
+angular.module('app', []);
 
 function downloadObjectAsJson(data, filename) {
   const json = JSON.stringify(data);
 
   var dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(json)}`;
-  var htmlAnchor = document.createElement("a");
-  htmlAnchor.setAttribute("href", dataStr);
-  htmlAnchor.setAttribute("download", filename);
+  var htmlAnchor = document.createElement('a');
+  htmlAnchor.setAttribute('href', dataStr);
+  htmlAnchor.setAttribute('download', filename);
   document.body.appendChild(htmlAnchor);
   htmlAnchor.click();
   htmlAnchor.remove();
 }
 
-angular.module("app").controller("BodyController", function ($scope) {
+angular.module('app').controller('BodyController', function ($scope) {
   $scope.editMode = false;
 
   function importFileChanged(e) {
@@ -34,11 +34,8 @@ angular.module("app").controller("BodyController", function ($scope) {
     }
   }
 
-  function onLoad() {
-    const importFile = document.getElementById("importFile");
-    importFile.addEventListener("change", importFileChanged);
-
-    const bookmarksData = localStorage.getItem("bookmarks");
+  function loadData() {
+    const bookmarksData = localStorage.getItem('bookmarks');
 
     if (!bookmarksData) {
       $scope.bookmarks = { columns: [] };
@@ -52,12 +49,29 @@ angular.module("app").controller("BodyController", function ($scope) {
       applyImages(bookmarks);
 
       $scope.bookmarks = bookmarks;
+      $scope.editMode = false;
     } catch (e) {
-      console.warn("invalid data");
+      console.warn('invalid data');
       $scope.bookmarks = { columns: [] };
       $scope.editMode = true;
     }
   }
+
+  function onLoad() {
+    const importFile = document.getElementById('importFile');
+    importFile.addEventListener('change', importFileChanged);
+
+    loadData();
+  }
+
+  $scope.save = function () {
+    alert('todo save');
+    $scope.editMode = false;
+  };
+
+  $scope.cancelSave = function () {
+    loadData();
+  };
 
   $scope.toggleEditMode = function () {
     $scope.editMode = !$scope.editMode;
@@ -85,33 +99,39 @@ angular.module("app").controller("BodyController", function ($scope) {
       images: images,
       metaData: {
         exportedOn: new Date().toISOString(),
-      },
+        version: 1
+      }
     };
 
-    downloadObjectAsJson(exportedData, "bookmark-data.json");
+    downloadObjectAsJson(exportedData, 'bookmark-data.json');
   };
 
   $scope.import = function () {
-    const importFile = document.getElementById("importFile");
+    const importFile = document.getElementById('importFile');
     importFile.click();
   };
 
   $scope.importFileChanged = function (evt) {
-    console.log("input file changed", evt);
+    console.log('input file changed', evt);
 
     const file = evt.target.files[0];
     const fileReader = new FileReader();
 
-    fileReader.onload = (_) => {
+    fileReader.onload = _ => {
       const data = fileReader.result;
 
       try {
         const json = JSON.parse(data);
 
+        if (!json || !json.metaData || json.metaData.version !== 1) {
+          throw new Error('invalid import file');
+        }
+
+        const ids = [];
         const bookmarks = { columns: [] };
 
-        if (!json || !json.bookmarks || !json.bookmarks.columns) {
-          throw new Error("no bookmarks in file");
+        if (!json.bookmarks || !json.bookmarks.columns) {
+          throw new Error('no bookmarks in file');
         }
 
         for (const importedColumn of json.bookmarks.columns) {
@@ -119,10 +139,15 @@ angular.module("app").controller("BodyController", function ($scope) {
             continue;
           }
 
+          if (ids.find(x => x === importedColumn.id)) {
+            throw new Error(`duplicate id: ${importedColumn.id}`);
+          }
+          ids.push(importedColumn.id);
+
           const column = {
             id: importedColumn.id,
             header: importedColumn.header,
-            items: [],
+            items: []
           };
 
           for (const importedItem of importedColumn.items) {
@@ -130,10 +155,15 @@ angular.module("app").controller("BodyController", function ($scope) {
               continue;
             }
 
+            if (ids.find(x => x === importedItem.id)) {
+              throw new Error(`duplicate id: ${importedItem.id}`);
+            }
+            ids.push(importedColumn.id);
+
             const item = {
               id: importedItem.id,
               title: importedItem.title,
-              href: importedItem.href,
+              href: importedItem.href
             };
 
             column.items.push(item);
@@ -143,14 +173,14 @@ angular.module("app").controller("BodyController", function ($scope) {
         }
 
         $scope.bookmarks = bookmarks;
-        localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 
         if (json.images) {
           for (const imageKey in json.images) {
             const imageData = json.images[imageKey];
             if (
-              typeof imageData !== "string" ||
-              !imageData.startsWith("data:image/")
+              typeof imageData !== 'string' ||
+              !imageData.startsWith('data:image/')
             ) {
               console.warn(`invalid image ${imageKey}`);
               continue;
@@ -165,7 +195,7 @@ angular.module("app").controller("BodyController", function ($scope) {
         $scope.editMode = false;
         $scope.$apply();
       } catch (e) {
-        console.log("error importing", e);
+        console.log('error importing', e);
       }
     };
 

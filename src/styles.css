@@ -7,11 +7,12 @@ body {
   margin: 0;
   background: #efefef;
   display: grid;
+  grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
-    "toolbar"
-    "banner"
-    "content"
-    "footer";
+    'toolbar'
+    'banner'
+    'content'
+    'footer';
 }
 
 .toolbar {
@@ -28,6 +29,7 @@ body {
   z-index: 10;
   position: absolute;
   top: 24px;
+  border-radius: 3px;
 }
 
 .context-menu ul {
@@ -58,6 +60,28 @@ body {
   border: solid 1px #b6d4fe;
   border-radius: 5px;
   padding: 5px;
+  line-height: 26px;
+}
+
+.banner .actions {
+  float: right;
+}
+
+.banner button {
+  color: #fff;
+  background-color: #0d6efd;
+  display: inline;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #0d6efd;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 3px;
 }
 
 .icon {
@@ -73,10 +97,15 @@ body {
   align-items: center;
 }
 
-.footer {
+footer {
   grid-area: footer;
   justify-self: center;
   color: #999;
+  margin: 10px;
+}
+
+footer a {
+  text-decoration: none;
 }
 
 .container {
@@ -85,14 +114,27 @@ body {
   justify-content: center;
 }
 
-.column {
+.column,
+.add-column {
   flex: 0 1 auto;
-  margin: 10px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .column h2 {
   margin: 5px;
   color: #333;
+}
+
+.edit-mode .column,
+.edit-mode .add-column {
+  border: dashed 2px #ccc;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.add-column {
+  min-width: 75px;
 }
 
 .bookmark {

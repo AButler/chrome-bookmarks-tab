@@ -28,7 +28,7 @@
         <ul>
           <li>
             <a href="#" ng-click="toggleEditMode()">
-              <span ng-if="editMode">tick</span>
+              <span ng-if="editMode">✔</span>
               Edit Mode
             </a>
           </li>
@@ -38,11 +38,14 @@
       </div>
     </div>
     <div class="banner" ng-if="editMode">
-      Banner
-      <button ng-click="toggleEditMode()">Done</button>
+      You are now in Edit mode. You can now make changes to your bookmarks.
+      <div class="actions">
+        <button ng-click="save()">Save</button>
+        <button ng-click="cancelSave()">Cancel</button>
+      </div>
     </div>
     <div class="content">
-      <div class="container">
+      <div class="container" ng-class="{ 'edit-mode': editMode }">
         <div class="column" ng-repeat="column in bookmarks.columns">
           <h2>{{ column.header }}</h2>
           <a
@@ -56,9 +59,15 @@
 
           <div class="add-bookmark" ng-if="editMode"></div>
         </div>
+
+        <div class="add-column" ng-if="editMode"></div>
       </div>
     </div>
-    <div class="footer">&copy; Andrew Butler 2021</div>
+    <footer>
+      <a href="https://www.buymeacoffee.com/AButler" target="_blank">
+        ☕ Buy me a coffee to say thanks
+      </a>
+    </footer>
 
     <div style="display: none">
       <input type="file" id="importFile" />

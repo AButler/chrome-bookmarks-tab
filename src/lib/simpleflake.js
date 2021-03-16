@@ -4,16 +4,19 @@ function generateSimpleflake() {
   const SIMPLEFLAKE_RANDOM_LENGTH = BigInt(23);
 
   const timestamp = Date.now();
-  let flakeBigInt = (BigInt(timestamp - SIMPLEFLAKE_EPOCH) << SIMPLEFLAKE_RANDOM_LENGTH) + BigInt(Math.round(Math.random() * UNSIGNED_23BIT_MAX));
+  let flakeBigInt =
+    (BigInt(timestamp - SIMPLEFLAKE_EPOCH) << SIMPLEFLAKE_RANDOM_LENGTH) +
+    BigInt(Math.round(Math.random() * UNSIGNED_23BIT_MAX));
 
-  const base58Digits = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+  const base58Digits =
+    '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
   const carry = BigInt(base58Digits.length);
   const remainder = [];
   while (flakeBigInt > 0) {
     remainder.unshift(base58Digits[flakeBigInt % carry]);
     flakeBigInt /= carry;
   }
-  
+
   const flake58 = remainder.join('');
   const paddedFlake = flake58.padStart(12, base58Digits[0]);
 
