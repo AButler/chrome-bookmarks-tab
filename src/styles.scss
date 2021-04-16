@@ -3,7 +3,11 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+$background-color: #efefef;
+
 html,
 body {
+  margin: 0;
   height: 100%;
+  background: $background-color;
 }
