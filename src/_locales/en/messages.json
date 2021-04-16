@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "Chrome New Tab Bookmarks",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "New Tab Bookmarks",
+    "description": "Extension short name"
+  },
+  "extDescription": {
+    "message": "Bookmark manager for the New Tab page",
+    "description": "Extension description"
+  }
+}

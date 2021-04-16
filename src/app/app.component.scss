@@ -1,0 +1,120 @@
+$background-color: #efefef;
+
+:host {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: $background-color;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    'toolbar'
+    'banner'
+    'content'
+    'footer';
+}
+
+.toolbar {
+  grid-area: toolbar;
+  display: flex;
+  margin: 10px 10px 0 0;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.banner {
+  grid-area: banner;
+  justify-self: center;
+  width: 80%;
+  line-height: 26px;
+
+  .actions {
+    float: right;
+  }
+}
+
+.content {
+  grid-area: content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+app-footer {
+  grid-area: footer;
+  justify-self: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .column,
+  .add-column {
+    flex: 0 1 auto;
+    margin: 5px;
+    padding: 5px;
+
+    h2 {
+      margin: 5px;
+      color: #333;
+      font-size: 1.2em;
+    }
+  }
+
+  &.edit-mode .column,
+  &.edit-mode .add-column {
+    border: dashed 2px #ccc;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .add-column {
+    min-width: 75px;
+  }
+
+  .bookmark {
+    display: block;
+    position: relative;
+    background: #fefefe;
+    padding: 5px;
+    margin: 15px 5px;
+    border-radius: 5px;
+    min-width: 180px;
+    min-height: 120px;
+    box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
+
+    &:hover {
+      box-shadow: 0px 0px 7px 0px rgba(128, 128, 128, 0.9);
+    }
+
+    .title {
+      bottom: 0;
+      position: absolute;
+      padding: 5px;
+      left: 0;
+      right: 0;
+      background: #fefefe;
+      border-radius: 0 0 4px 4px;
+      border-top: solid 1px #ccc;
+      font-size: 12px;
+    }
+  }
+
+  .add-bookmark {
+    display: block;
+    position: relative;
+    padding: 5px;
+    margin: 15px 5px;
+    border-radius: 5px;
+    min-width: 180px;
+    min-height: 120px;
+    box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
+
+    &:hover {
+      box-shadow: 0px 0px 7px 0px rgba(128, 128, 128, 0.9);
+    }
+  }
+}
