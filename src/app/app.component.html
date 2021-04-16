@@ -5,34 +5,16 @@
   (export)="export()"
 ></app-toolbar>
 
-<div class="banner alert alert-primary" *ngIf="editMode">
-  You are now in Edit mode. You can now make changes to your bookmarks.
-  <div class="actions">
-    <button class="btn btn-primary btn-sm" (click)="save()">Save</button>
-    <button class="btn btn-sm" (click)="cancelSave()">Cancel</button>
-  </div>
-</div>
+<app-banner
+  *ngIf="editMode"
+  (save)="save()"
+  (cancel)="cancelSave()"
+></app-banner>
 
-<div class="content">
-  <div class="container" [ngClass]="{ 'edit-mode': editMode }">
-    <div class="column" *ngFor="let column of bookmarks.columns">
-      <h2>{{ column.header }}</h2>
-      <a
-        class="bookmark"
-        *ngFor="let item of column.items"
-        (click)="selectItem(item)"
-        [href]="editMode ? '' : item.href"
-        [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
-      >
-        <span class="title">{{ item.title }}</span>
-      </a>
-
-      <div class="add-bookmark" *ngIf="editMode"></div>
-    </div>
-
-    <div class="add-column" *ngIf="editMode"></div>
-  </div>
-</div>
+<app-bookmark-content
+  [editMode]="editMode"
+  [bookmarks]="bookmarks"
+></app-bookmark-content>
 
 <app-footer></app-footer>
 

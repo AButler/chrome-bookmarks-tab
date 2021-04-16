@@ -66,18 +66,15 @@ export class AppComponent {
   }
 
   save() {
-    alert('save');
+    const exportedData = this.importExportService.export(this.bookmarks);
+    this.bookmarks = this.importExportService.import(
+      JSON.stringify(exportedData)
+    );
+    this.editMode = false;
   }
 
   cancelSave() {
     this.load();
-  }
-
-  selectItem(item: BookmarkItem) {
-    if (!this.editMode) {
-      return;
-    }
-    alert(`item selected: [${item.id}] ${item.title}`);
   }
 
   importFileChanged(evt: Event) {

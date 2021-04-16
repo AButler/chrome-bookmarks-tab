@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit {{ item.title }}</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form name="form">
+    <div class="form-group">
+      <label for="item-title">Caption</label>
+      <input
+        type="text"
+        name="title"
+        [(ngModel)]="item.title"
+        class="form-control"
+        id="item-title"
+        placeholder="Enter a caption for the bookmark"
+      />
+    </div>
+    <div class="form-group">
+      <label for="item-url">URL</label>
+      <input
+        type="url"
+        name="url"
+        [(ngModel)]="item.href"
+        class="form-control"
+        id="item-url"
+        placeholder="Enter a URL for the bookmark"
+      />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="activeModal.close('save')"
+  >
+    Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close()"
+  >
+    Close
+  </button>
+</div>
