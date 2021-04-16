@@ -1,0 +1,30 @@
+<div class="container" [ngClass]="{ 'edit-mode': editMode }">
+  <div class="column" *ngFor="let column of bookmarks.columns">
+    <h2>{{ column.header }}</h2>
+
+    <ng-container *ngIf="!editMode">
+      <a
+        class="bookmark"
+        *ngFor="let item of column.items"
+        [href]="item.href"
+        [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
+      >
+        <span class="title">{{ item.title }}</span>
+      </a>
+    </ng-container>
+    <ng-container *ngIf="editMode">
+      <a
+        class="bookmark"
+        *ngFor="let item of column.items"
+        (click)="selectItem(item)"
+        [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
+      >
+        <span class="title">{{ item.title }}</span>
+      </a>
+    </ng-container>
+
+    <div class="add-bookmark" *ngIf="editMode"></div>
+  </div>
+
+  <div class="add-column" *ngIf="editMode"></div>
+</div>

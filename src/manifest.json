@@ -7,7 +7,7 @@
   "default_locale": "en",
   "description": "__MSG_extDescription__",
   "chrome_url_overrides": {
-    "newtab": "newtab.html"
+    "newtab": "index.html"
   },
   "manifest_version": 3
 }

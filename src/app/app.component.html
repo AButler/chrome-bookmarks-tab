@@ -1,0 +1,27 @@
+<app-toolbar
+  [editMode]="editMode"
+  (editModeChanged)="editModeChanged($event)"
+  (import)="import()"
+  (export)="export()"
+></app-toolbar>
+
+<app-banner
+  *ngIf="editMode"
+  (save)="save()"
+  (cancel)="cancelSave()"
+></app-banner>
+
+<app-bookmark-content
+  [editMode]="editMode"
+  [bookmarks]="bookmarks"
+></app-bookmark-content>
+
+<app-footer></app-footer>
+
+<input
+  type="file"
+  name="file"
+  #importFile
+  style="display: none"
+  (change)="importFileChanged($event)"
+/>
