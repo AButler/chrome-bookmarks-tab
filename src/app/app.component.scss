@@ -14,13 +14,8 @@ $background-color: #efefef;
     'footer';
 }
 
-.toolbar {
+app-toolbar {
   grid-area: toolbar;
-  display: flex;
-  margin: 10px 10px 0 0;
-  flex-direction: row;
-  justify-content: flex-end;
-  position: relative;
 }
 
 .banner {

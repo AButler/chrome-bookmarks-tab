@@ -1,24 +1,9 @@
-<div class="toolbar">
-  <div class="d-inline-block" ngbDropdown>
-    <button class="btn btn-link" ngbDropdownToggle>
-      <img
-        src="assets/images/configure.png"
-        width="16"
-        height="16"
-        alt="Configure"
-      />
-    </button>
-    <div ngbDropdownMenu>
-      <button ngbDropdownItem (click)="toggleEditMode()">
-        <span *ngIf="editMode">✔</span>
-        Edit Mode
-      </button>
-      <div class="dropdown-divider"></div>
-      <button ngbDropdownItem (click)="import()">Import</button>
-      <button ngbDropdownItem (click)="export()">Export</button>
-    </div>
-  </div>
-</div>
+<app-toolbar
+  [editMode]="editMode"
+  (editModeChanged)="editModeChanged($event)"
+  (import)="import()"
+  (export)="export()"
+></app-toolbar>
 
 <div class="banner alert alert-primary" *ngIf="editMode">
   You are now in Edit mode. You can now make changes to your bookmarks.

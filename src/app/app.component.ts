@@ -51,8 +51,8 @@ export class AppComponent {
     }
   }
 
-  toggleEditMode() {
-    this.editMode = !this.editMode;
+  editModeChanged(newEditMode: boolean) {
+    this.editMode = newEditMode;
   }
 
   import() {
