@@ -1,5 +1,6 @@
 <div class="modal-header">
-  <h4 class="modal-title">Edit {{ item.title }}</h4>
+  <h4 class="modal-title" *ngIf="!isNew">Edit {{ item.title }}</h4>
+  <h4 class="modal-title" *ngIf="isNew">Add Bookmark</h4>
   <button
     type="button"
     class="close"
@@ -33,6 +34,33 @@
         placeholder="Enter a URL for the bookmark"
       />
     </div>
+    <div class="form-group">
+      <label for="">Thumbnail</label>
+      <div class="thumbnail-container">
+        <div
+          class="thumbnail"
+          [ngStyle]="{
+            'background-image': item.image ? 'url(' + item.image + ')' : ''
+          }"
+        ></div>
+        <div class="actions">
+          <button class="btn btn-outline-primary" (click)="imageFile.click()">
+            Upload
+          </button>
+          <button
+            class="btn"
+            [ngClass]="{
+              'btn-outline-danger': item.image,
+              'btn-outline-dark': !item.image
+            }"
+            (click)="removeImage()"
+            [disabled]="!item.image"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 <div class="modal-footer">
@@ -51,3 +79,11 @@
     Close
   </button>
 </div>
+
+<input
+  type="file"
+  name="file"
+  #imageFile
+  style="display: none"
+  (change)="imageFileChanged($event)"
+/>

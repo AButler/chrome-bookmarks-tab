@@ -9,6 +9,7 @@ import { BannerComponent } from './banner/banner.component';
 import { BookmarkContentComponent } from './bookmark-content/bookmark-content.component';
 import { EditBookmarkModalComponent } from './edit-bookmark-modal/edit-bookmark-modal.component';
 import { FormsModule } from '@angular/forms';
+import { EditColumnModalComponent } from './edit-column-modal/edit-column-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     ToolbarComponent,
     BannerComponent,
     BookmarkContentComponent,
-    EditBookmarkModalComponent
+    EditBookmarkModalComponent,
+    EditColumnModalComponent
   ],
   imports: [BrowserModule, FormsModule, NgbModule],
   providers: [],

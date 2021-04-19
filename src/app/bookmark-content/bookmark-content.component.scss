@@ -24,7 +24,8 @@
   }
 
   .add-column {
-    min-width: 75px;
+    min-width: 214px;
+    background: #fff url('../../assets/images/add.png') center center no-repeat;
   }
 
   .bookmark {
@@ -34,8 +35,8 @@
     padding: 5px;
     margin: 15px 5px;
     border-radius: 5px;
-    min-width: 180px;
-    min-height: 120px;
+    width: 180px;
+    height: 120px;
     box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
 
     &:hover {
@@ -55,6 +56,10 @@
     }
   }
 
+  &.edit-mode .bookmark {
+    cursor: pointer;
+  }
+
   .add-bookmark {
     display: block;
     position: relative;
@@ -64,6 +69,7 @@
     min-width: 180px;
     min-height: 120px;
     box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
+    background: #fff url('../../assets/images/add.png') center center no-repeat;
 
     &:hover {
       box-shadow: 0px 0px 7px 0px rgba(128, 128, 128, 0.9);

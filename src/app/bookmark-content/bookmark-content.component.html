@@ -1,6 +1,6 @@
 <div class="container" [ngClass]="{ 'edit-mode': editMode }">
   <div class="column" *ngFor="let column of bookmarks.columns">
-    <h2>{{ column.header }}</h2>
+    <h2 (click)="editColumn(column)">{{ column.header }}</h2>
 
     <ng-container *ngIf="!editMode">
       <a
@@ -13,18 +13,20 @@
       </a>
     </ng-container>
     <ng-container *ngIf="editMode">
-      <a
+      <div
         class="bookmark"
         *ngFor="let item of column.items"
         (click)="selectItem(item)"
-        [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
+        [ngStyle]="{
+          'background-image': item.image ? 'url(' + item.image + ')' : ''
+        }"
       >
         <span class="title">{{ item.title }}</span>
-      </a>
+      </div>
     </ng-container>
 
-    <div class="add-bookmark" *ngIf="editMode"></div>
+    <div class="add-bookmark" (click)="addItem(column)" *ngIf="editMode"></div>
   </div>
 
-  <div class="add-column" *ngIf="editMode"></div>
+  <div class="add-column" (click)="addColumn()" *ngIf="editMode"></div>
 </div>

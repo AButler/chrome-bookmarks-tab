@@ -1,0 +1,33 @@
+.thumbnail-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'thumbnail'
+    'actions';
+
+  .thumbnail {
+    grid-area: thumbnail;
+
+    display: inline-block;
+    position: relative;
+    background: #fefefe;
+    padding: 5px;
+    border-radius: 5px;
+    width: 180px;
+    height: 120px;
+    box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
+  }
+
+  .actions {
+    padding: 5px;
+    margin-left: 15px;
+
+    button:first-child {
+      margin-left: 0;
+    }
+
+    button {
+      margin: 5px;
+    }
+  }
+}

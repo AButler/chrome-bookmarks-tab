@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="!isNew">Edit {{ column.header }}</h4>
+  <h4 class="modal-title" *ngIf="isNew">Add Column</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form name="form">
+    <div class="form-group">
+      <label for="column-header">Header</label>
+      <input
+        type="text"
+        name="header"
+        [(ngModel)]="column.header"
+        class="form-control"
+        id="column-header"
+        placeholder="Enter a header for the column"
+      />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="activeModal.close('save')"
+  >
+    Save
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close()"
+  >
+    Close
+  </button>
+</div>
