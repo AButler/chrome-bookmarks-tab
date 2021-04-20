@@ -10,6 +10,7 @@ import { BookmarkContentComponent } from './bookmark-content/bookmark-content.co
 import { EditBookmarkModalComponent } from './edit-bookmark-modal/edit-bookmark-modal.component';
 import { FormsModule } from '@angular/forms';
 import { EditColumnModalComponent } from './edit-column-modal/edit-column-modal.component';
+import { DndModule } from 'ngx-drag-drop';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { EditColumnModalComponent } from './edit-column-modal/edit-column-modal.
     EditBookmarkModalComponent,
     EditColumnModalComponent
   ],
-  imports: [BrowserModule, FormsModule, NgbModule],
+  imports: [BrowserModule, FormsModule, NgbModule, DndModule],
   providers: [],
   bootstrap: [AppComponent]
 })

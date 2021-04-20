@@ -1,6 +1,12 @@
 <div class="container" [ngClass]="{ 'edit-mode': editMode }">
-  <div class="column" *ngFor="let column of bookmarks.columns">
+  <div
+    class="column"
+    *ngFor="let column of bookmarks.columns"
+    [dndDropzone]="undefined"
+    (dndDrop)="onDrop($event, column)"
+  >
     <h2 (click)="editColumn(column)">{{ column.header }}</h2>
+    <div class="placeholder" dndPlaceholderRef></div>
 
     <ng-container *ngIf="!editMode">
       <a
@@ -17,6 +23,9 @@
         class="bookmark"
         *ngFor="let item of column.items"
         (click)="selectItem(item)"
+        [dndDraggable]="item"
+        (dndMoved)="onDragged(item, column)"
+        dndEffectAllowed="move"
         [ngStyle]="{
           'background-image': item.image ? 'url(' + item.image + ')' : ''
         }"
@@ -28,5 +37,13 @@
     <div class="add-bookmark" (click)="addItem(column)" *ngIf="editMode"></div>
   </div>
 
-  <div class="add-column" (click)="addColumn()" *ngIf="editMode"></div>
+  <div
+    class="add-column"
+    (click)="addColumn()"
+    *ngIf="editMode"
+    [dndDropzone]="undefined"
+    (dndDrop)="onDropNewColumn($event)"
+  >
+    <div class="placeholder" dndPlaceholderRef></div>
+  </div>
 </div>

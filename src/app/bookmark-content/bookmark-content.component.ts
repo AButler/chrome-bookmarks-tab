@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DndDropEvent } from 'ngx-drag-drop';
 import { BookmarkData, BookmarkItem, Column } from '../bookmarks';
 import { EditBookmarkModalComponent } from '../edit-bookmark-modal/edit-bookmark-modal.component';
 import { EditColumnModalComponent } from '../edit-column-modal/edit-column-modal.component';
@@ -13,6 +14,7 @@ import { SimpleflakeService } from '../simpleflake.service';
 export class BookmarkContentComponent implements OnInit {
   @Input() editMode!: boolean;
   @Input() bookmarks!: BookmarkData;
+  dragging: boolean = false;
 
   constructor(
     private simpleflakeService: SimpleflakeService,
@@ -101,5 +103,29 @@ export class BookmarkContentComponent implements OnInit {
       item.href = updatedItem.href;
       item.image = updatedItem.image;
     }
+  }
+
+  onDragged(item: BookmarkItem, column: Column) {
+    const index = column.items.indexOf(item);
+    column.items.splice(index, 1);
+  }
+
+  onDrop(event: DndDropEvent, column: Column) {
+    const index =
+      typeof event.index === 'undefined'
+        ? column.items.length
+        : event.index - 1;
+
+    column.items.splice(index, 0, event.data);
+  }
+
+  onDropNewColumn(event: DndDropEvent) {
+    const newColumn: Column = {
+      id: this.simpleflakeService.generate(),
+      header: 'New Column',
+      items: [event.data]
+    };
+
+    this.bookmarks.columns.push(newColumn);
   }
 }
