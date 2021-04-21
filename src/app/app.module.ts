@@ -11,6 +11,7 @@ import { EditBookmarkModalComponent } from './edit-bookmark-modal/edit-bookmark-
 import { FormsModule } from '@angular/forms';
 import { EditColumnModalComponent } from './edit-column-modal/edit-column-modal.component';
 import { DndModule } from 'ngx-drag-drop';
+import { SelectTabModalComponent } from './select-tab-modal/select-tab-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DndModule } from 'ngx-drag-drop';
     BannerComponent,
     BookmarkContentComponent,
     EditBookmarkModalComponent,
-    EditColumnModalComponent
+    EditColumnModalComponent,
+    SelectTabModalComponent
   ],
   imports: [BrowserModule, FormsModule, NgbModule, DndModule],
   providers: [],

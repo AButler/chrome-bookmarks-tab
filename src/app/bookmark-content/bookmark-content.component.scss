@@ -1,4 +1,4 @@
-.container {
+.bookmark-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -74,8 +74,9 @@
     padding: 5px;
     margin: 15px 5px;
     border-radius: 5px;
-    width: 180px;
-    height: 120px;
+    width: var(--bookmark-width);
+    height: var(--bookmark-height);
+    background-repeat: no-repeat;
     border: dashed 2px #ccc;
   }
 
@@ -85,8 +86,8 @@
     padding: 5px;
     margin: 15px 5px;
     border-radius: 5px;
-    width: 180px;
-    height: 120px;
+    width: var(--bookmark-width);
+    height: var(--bookmark-height);
     box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
     background: #fff url('../../assets/images/add.png') center center no-repeat;
 

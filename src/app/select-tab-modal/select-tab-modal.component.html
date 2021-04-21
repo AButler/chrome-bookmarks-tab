@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">Select Tab</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.close()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="tab-collection-container">
+    <div class="tab-collection" *ngFor="let tabCollection of tabCollections">
+      <div
+        class="tab-container"
+        *ngFor="let tab of tabCollection.tabs"
+        (click)="select(tab)"
+      >
+        <div class="tab"></div>
+        <div class="title">
+          {{ tab.title }}
+        </div>
+        <div class="subtitle">
+          {{ tab.url }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close()"
+  >
+    Cancel
+  </button>
+</div>

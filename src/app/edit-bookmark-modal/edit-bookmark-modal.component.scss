@@ -10,11 +10,12 @@
 
     display: inline-block;
     position: relative;
-    background: #fefefe;
+    background-color: #fefefe;
+    background-repeat: no-repeat;
     padding: 5px;
     border-radius: 5px;
-    width: 180px;
-    height: 120px;
+    width: var(--bookmark-width);
+    height: var(--bookmark-height);
     box-shadow: 0px 0px 5px 0px rgba(128, 128, 128, 0.6);
   }
 

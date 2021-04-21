@@ -6,6 +6,8 @@
   "homepage_url": "https://github.com/AButler/chrome-bookmarks-tab",
   "default_locale": "en",
   "description": "__MSG_extDescription__",
+  "permissions": ["tabs"],
+  "host_permissions": ["<all_urls>"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

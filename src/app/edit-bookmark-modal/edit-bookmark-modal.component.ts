@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookmarkItem } from '../bookmarks';
+import { SelectTabModalComponent } from '../select-tab-modal/select-tab-modal.component';
 
 @Component({
   selector: 'app-edit-bookmark-modal',
@@ -12,7 +13,10 @@ export class EditBookmarkModalComponent implements OnInit {
   @Input() item!: BookmarkItem;
   @Input() isNew: boolean = false;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(
+    public activeModal: NgbActiveModal,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {}
 
@@ -45,5 +49,20 @@ export class EditBookmarkModalComponent implements OnInit {
     }
 
     this.imageFile.nativeElement.value = '';
+  }
+
+  async captureScreenshot(item: BookmarkItem) {
+    const modal = this.modalService.open(SelectTabModalComponent, {
+      size: 'xl'
+    });
+    modal.componentInstance.item = item;
+
+    const result = await modal.result;
+
+    if (result === 'select') {
+      const newImage = modal.componentInstance.image;
+      //console.log('selected', newImage);
+      this.item.image = newImage;
+    }
   }
 }

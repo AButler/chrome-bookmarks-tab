@@ -48,6 +48,12 @@
             Upload
           </button>
           <button
+            class="btn btn-outline-primary"
+            (click)="captureScreenshot(item)"
+          >
+            Capture
+          </button>
+          <button
             class="btn"
             [ngClass]="{
               'btn-outline-danger': item.image,
