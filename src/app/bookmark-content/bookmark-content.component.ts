@@ -96,13 +96,35 @@ export class BookmarkContentComponent implements OnInit {
 
     const result = await modal.result;
 
-    if (result === 'save') {
-      const updatedItem = modal.componentInstance.item as BookmarkItem;
+    switch (result) {
+      case 'save':
+        const updatedItem = modal.componentInstance.item as BookmarkItem;
 
-      item.title = updatedItem.title;
-      item.href = updatedItem.href;
-      item.image = updatedItem.image;
+        item.title = updatedItem.title;
+        item.href = updatedItem.href;
+        item.image = updatedItem.image;
+        break;
+      case 'delete':
+        const column = this.bookmarks.columns.find(
+          c => !!c.items.find(i => i === item)
+        );
+
+        if (!column) {
+          return;
+        }
+
+        await this.removeItem(column, item);
+        break;
     }
+  }
+
+  async removeItem(column: Column, item: BookmarkItem): Promise<void> {
+    if (!this.editMode) {
+      return;
+    }
+
+    const index = column.items.indexOf(item);
+    column.items.splice(index, 1);
   }
 
   onDragged(item: BookmarkItem, column: Column) {

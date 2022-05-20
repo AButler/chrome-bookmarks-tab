@@ -30,6 +30,7 @@
           'background-image': item.image ? 'url(' + item.image + ')' : ''
         }"
       >
+        <div class="remove" (click)="removeItem(column, item)"></div>
         <span class="title">{{ item.title }}</span>
       </div>
     </ng-container>
