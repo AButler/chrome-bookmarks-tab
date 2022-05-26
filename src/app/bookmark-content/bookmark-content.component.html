@@ -11,10 +11,21 @@
     <ng-container *ngIf="!editMode">
       <a
         class="bookmark"
+        [ngClass]="{
+          navigating: navigatingBookmark === item,
+          notSelected: !!navigatingBookmark && navigatingBookmark !== item
+        }"
         *ngFor="let item of column.items"
+        (click)="onBookmarkClicked(item)"
         [href]="item.href"
         [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
       >
+        <ngx-spinner
+          type="ball-clip-rotate"
+          [name]="item.id"
+          [fullScreen]="false"
+          size="medium"
+        ></ngx-spinner>
         <span class="title">{{ item.title }}</span>
       </a>
     </ng-container>

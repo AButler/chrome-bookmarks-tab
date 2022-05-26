@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DndDropEvent } from 'ngx-drag-drop';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BookmarkData, BookmarkItem, Column } from '../bookmarks';
 import { EditBookmarkModalComponent } from '../edit-bookmark-modal/edit-bookmark-modal.component';
 import { EditColumnModalComponent } from '../edit-column-modal/edit-column-modal.component';
@@ -15,13 +16,20 @@ export class BookmarkContentComponent implements OnInit {
   @Input() editMode!: boolean;
   @Input() bookmarks!: BookmarkData;
   dragging: boolean = false;
+  navigatingBookmark?: BookmarkItem;
 
   constructor(
     private simpleflakeService: SimpleflakeService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private spinnerService: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {}
+
+  onBookmarkClicked(item: BookmarkItem) {
+    this.navigatingBookmark = item;
+    this.spinnerService.show(item.id);
+  }
 
   async addColumn() {
     if (!this.editMode) {

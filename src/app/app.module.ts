@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { EditColumnModalComponent } from './edit-column-modal/edit-column-modal.component';
 import { DndModule } from 'ngx-drag-drop';
 import { SelectTabModalComponent } from './select-tab-modal/select-tab-modal.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,9 @@ import { SelectTabModalComponent } from './select-tab-modal/select-tab-modal.com
     EditColumnModalComponent,
     SelectTabModalComponent
   ],
-  imports: [BrowserModule, FormsModule, NgbModule, DndModule],
+  imports: [BrowserModule, FormsModule, NgbModule, DndModule, NgxSpinnerModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
