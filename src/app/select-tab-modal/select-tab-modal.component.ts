@@ -22,7 +22,7 @@ interface Tab {
   styleUrls: ['./select-tab-modal.component.scss']
 })
 export class SelectTabModalComponent implements OnInit {
-  private isDevMode: boolean = false;
+  private isDevMode = false;
 
   tabCollections: TabCollection[] = [];
   image?: string;
@@ -43,7 +43,7 @@ export class SelectTabModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async select(tab: Tab) {
+  async select(tab: Tab): Promise<void> {
     if (this.isDevMode) {
       this.activeModal.close();
       return;
@@ -72,7 +72,7 @@ export class SelectTabModalComponent implements OnInit {
 
     const tabCollections: TabCollection[] = [];
 
-    for (let chromeTab of chromeTabs) {
+    for (const chromeTab of chromeTabs) {
       let tabCollection = tabCollections.find(
         t => t.index === chromeTab.windowId
       );

@@ -11,7 +11,7 @@ import { SelectTabModalComponent } from '../select-tab-modal/select-tab-modal.co
 export class EditBookmarkModalComponent implements OnInit {
   @ViewChild('imageFile') imageFile!: ElementRef<HTMLInputElement>;
   @Input() item!: BookmarkItem;
-  @Input() isNew: boolean = false;
+  @Input() isNew = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -20,11 +20,11 @@ export class EditBookmarkModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  removeImage() {
+  removeImage(): void {
     delete this.item.image;
   }
 
-  imageFileChanged(e: Event) {
+  imageFileChanged(e: Event): void {
     const input = this?.imageFile?.nativeElement;
     if (!input) {
       console.error('could not find input');
@@ -51,7 +51,7 @@ export class EditBookmarkModalComponent implements OnInit {
     this.imageFile.nativeElement.value = '';
   }
 
-  async captureScreenshot(item: BookmarkItem) {
+  async captureScreenshot(item: BookmarkItem): Promise<void> {
     const modal = this.modalService.open(SelectTabModalComponent, {
       size: 'xl'
     });
@@ -61,7 +61,6 @@ export class EditBookmarkModalComponent implements OnInit {
 
     if (result === 'select') {
       const newImage = modal.componentInstance.image;
-      //console.log('selected', newImage);
       this.item.image = newImage;
     }
   }

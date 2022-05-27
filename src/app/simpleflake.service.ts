@@ -10,7 +10,7 @@ const SIMPLEFLAKE_RANDOM_LENGTH = BigInt(23);
 export class SimpleflakeService {
   constructor() {}
 
-  generate() {
+  generate(): string {
     const timestamp = Date.now();
     let flakeBigInt =
       (BigInt(timestamp - SIMPLEFLAKE_EPOCH) << SIMPLEFLAKE_RANDOM_LENGTH) +

@@ -17,7 +17,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleEditMode() {
+  toggleEditMode(): void {
     this.editMode = !this.editMode;
     this.editModeChanged.emit(this.editMode);
   }

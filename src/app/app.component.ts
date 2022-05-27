@@ -6,8 +6,8 @@ import { ImportExportService } from './import-export.service';
 function downloadObjectAsJson(data: ExportedBookmarks, filename: string): void {
   const json = JSON.stringify(data);
 
-  var dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(json)}`;
-  var htmlAnchor = document.createElement('a');
+  const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(json)}`;
+  const htmlAnchor = document.createElement('a');
   htmlAnchor.setAttribute('href', dataStr);
   htmlAnchor.setAttribute('download', filename);
   document.body.appendChild(htmlAnchor);
@@ -32,7 +32,7 @@ export class AppComponent {
     this.load();
   }
 
-  private load() {
+  private load(): void {
     try {
       const bookmarks = this.importExportService.load();
 
@@ -51,21 +51,21 @@ export class AppComponent {
     }
   }
 
-  editModeChanged(newEditMode: boolean) {
+  editModeChanged(newEditMode: boolean): void {
     this.editMode = newEditMode;
   }
 
-  import() {
+  import(): void {
     this.importFile.nativeElement.click();
   }
 
-  export() {
+  export(): void {
     const exportedData = this.importExportService.export(this.bookmarks);
 
     downloadObjectAsJson(exportedData, 'bookmark-data.json');
   }
 
-  save() {
+  save(): void {
     const exportedData = this.importExportService.export(this.bookmarks);
     this.bookmarks = this.importExportService.import(
       JSON.stringify(exportedData)
@@ -73,11 +73,11 @@ export class AppComponent {
     this.editMode = false;
   }
 
-  cancelSave() {
+  cancelSave(): void {
     this.load();
   }
 
-  importFileChanged(evt: Event) {
+  importFileChanged(evt: Event): void {
     const input = this?.importFile?.nativeElement;
     if (!input) {
       console.error('could not find input');

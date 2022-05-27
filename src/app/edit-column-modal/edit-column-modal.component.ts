@@ -9,7 +9,7 @@ import { Column } from '../bookmarks';
 })
 export class EditColumnModalComponent implements OnInit {
   @Input() column!: Column;
-  @Input() isNew: boolean = false;
+  @Input() isNew = false;
 
   constructor(public activeModal: NgbActiveModal) {}
 

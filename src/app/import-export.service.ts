@@ -106,8 +106,8 @@ export class ImportExportService {
     }
 
     const exportedData: ExportedBookmarks = {
-      bookmarks: bookmarks,
-      images: images,
+      bookmarks,
+      images,
       metaData: {
         exportedOn: new Date().toISOString(),
         version: 1
@@ -133,7 +133,7 @@ export class ImportExportService {
     return { columns: [] };
   }
 
-  private applyImages(bookmarks: BookmarkData) {
+  private applyImages(bookmarks: BookmarkData): void {
     for (const bookmark of bookmarks.columns) {
       for (const item of bookmark.items) {
         const image = localStorage.getItem(`img-${item.id}`);

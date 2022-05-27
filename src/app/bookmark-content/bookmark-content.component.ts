@@ -15,7 +15,7 @@ import { SimpleflakeService } from '../simpleflake.service';
 export class BookmarkContentComponent implements OnInit {
   @Input() editMode!: boolean;
   @Input() bookmarks!: BookmarkData;
-  dragging: boolean = false;
+  dragging = false;
   navigatingBookmark?: BookmarkItem;
 
   constructor(
@@ -26,12 +26,16 @@ export class BookmarkContentComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onBookmarkClicked(item: BookmarkItem) {
+  onBookmarkClicked(item: BookmarkItem): void {
+    if (this.navigatingBookmark) {
+      this.spinnerService.hide(this.navigatingBookmark.id);
+    }
+
     this.navigatingBookmark = item;
     this.spinnerService.show(item.id);
   }
 
-  async addColumn() {
+  async addColumn(): Promise<void> {
     if (!this.editMode) {
       return;
     }
@@ -54,7 +58,7 @@ export class BookmarkContentComponent implements OnInit {
     }
   }
 
-  async editColumn(column: Column) {
+  async editColumn(column: Column): Promise<void> {
     if (!this.editMode) {
       return;
     }
@@ -135,12 +139,12 @@ export class BookmarkContentComponent implements OnInit {
     column.items.splice(index, 1);
   }
 
-  onDragged(item: BookmarkItem, column: Column) {
+  onDragged(item: BookmarkItem, column: Column): void {
     const index = column.items.indexOf(item);
     column.items.splice(index, 1);
   }
 
-  onDrop(event: DndDropEvent, column: Column) {
+  onDrop(event: DndDropEvent, column: Column): void {
     const index =
       typeof event.index === 'undefined'
         ? column.items.length
@@ -149,7 +153,7 @@ export class BookmarkContentComponent implements OnInit {
     column.items.splice(index, 0, event.data);
   }
 
-  onDropNewColumn(event: DndDropEvent) {
+  onDropNewColumn(event: DndDropEvent): void {
     const newColumn: Column = {
       id: this.simpleflakeService.generate(),
       header: 'New Column',
