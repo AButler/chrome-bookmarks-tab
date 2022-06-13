@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import 'chrome-extension-async';
-import { ImageResizeService } from '../image-resize.service';
+import { DummyImageService } from '../dummy-image.service';
 
 interface TabCollection {
   index: number;
@@ -29,7 +29,7 @@ export class SelectTabModalComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private imageResizeService: ImageResizeService
+    private dummyImageService: DummyImageService
   ) {
     if (!chrome.tabs) {
       // Dev mode
@@ -45,7 +45,8 @@ export class SelectTabModalComponent implements OnInit {
 
   async select(tab: Tab): Promise<void> {
     if (this.isDevMode) {
-      this.activeModal.close();
+      this.image = this.dummyImageService.newDummyImage();
+      this.activeModal.close('select');
       return;
     }
 
@@ -57,12 +58,7 @@ export class SelectTabModalComponent implements OnInit {
 
     await chrome.tabs.update(tab.id, { active: true });
     const image = await chrome.tabs.captureVisibleTab(tab.windowId);
-    const thumbnail = await this.imageResizeService.resizeImage(
-      image,
-      180,
-      120
-    );
-    this.image = thumbnail;
+    this.image = image;
     await chrome.tabs.update(currentTab.id, { active: true });
     this.activeModal.close('select');
   }

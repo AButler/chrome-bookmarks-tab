@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ImageResizeService } from './image-resize.service';
+import { DummyImageService } from './dummy-image.service';
 
-describe('ImageResizeService', () => {
-  let service: ImageResizeService;
+describe('DummyImageService', () => {
+  let service: DummyImageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ImageResizeService);
+    service = TestBed.inject(DummyImageService);
   });
 
   it('should be created', () => {

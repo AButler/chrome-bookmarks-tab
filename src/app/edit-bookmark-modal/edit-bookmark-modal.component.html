@@ -100,3 +100,15 @@
   style="display: none"
   (change)="imageFileChanged($event)"
 />
+
+<ngx-photo-editor
+  [imageBase64]="imageBase64"
+  (imageCropped)="imageCropped($event)"
+  [aspectRatio]="3 / 2"
+  [viewMode]="1"
+  [resizeToWidth]="180"
+  [darkTheme]="false"
+  [hideModalHeader]="true"
+  [mask]="false"
+  [modalSize]="'lg'"
+></ngx-photo-editor>

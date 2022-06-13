@@ -13,6 +13,7 @@ import { EditColumnModalComponent } from './edit-column-modal/edit-column-modal.
 import { DndModule } from 'ngx-drag-drop';
 import { SelectTabModalComponent } from './select-tab-modal/select-tab-modal.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     EditColumnModalComponent,
     SelectTabModalComponent
   ],
-  imports: [BrowserModule, FormsModule, NgbModule, DndModule, NgxSpinnerModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    NgbModule,
+    DndModule,
+    NgxSpinnerModule,
+    NgxPhotoEditorModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
